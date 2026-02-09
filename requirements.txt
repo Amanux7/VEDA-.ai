@@ -1,0 +1,34 @@
+# VEDA Phase-0 Dependencies
+# Optimized for GTX 1650 (4GB VRAM)
+
+# Core ML Framework (CUDA 11.8)
+torch>=2.1.0
+torchvision>=0.16.0
+
+# LTX-Video Pipeline
+diffusers>=0.31.0
+transformers>=4.36.0
+accelerate>=0.25.0
+safetensors>=0.4.0
+
+# Image Processing
+Pillow>=10.0.0
+opencv-python>=4.8.0
+
+# Video Processing
+ffmpeg-python>=0.2.0
+
+# Utilities
+numpy>=1.24.0
+tqdm>=4.65.0
+sentencepiece>=0.2.0
+
+# CLI
+argparse
+
+# Optional: Testing
+pytest>=7.4.0
+
+# Colab Integration
+gradio>=4.0.0
+gradio_client>=0.10.0
