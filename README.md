@@ -36,7 +36,7 @@ VEDA is a powerful AI video generation engine designed for content creators. Gen
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/VEDA.git
+git clone https://github.com/Amanux7/VEDA.git
 cd VEDA
 
 # Install dependencies
@@ -260,3 +260,4 @@ MIT License © 2025 Aman Singh
 [⭐ Star this repo](https://github.com/yourusername/VEDA) • [🐛 Report Bug](https://github.com/yourusername/VEDA/issues) • [💡 Request Feature](https://github.com/yourusername/VEDA/issues)
 
 </div>
+
