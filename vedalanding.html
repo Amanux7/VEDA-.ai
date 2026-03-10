@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VEDA – AI Video Creation for Creators</title>
+
+    <style>
+        :root {
+            --black: #000;
+            --white: #fff;
+            --glass: rgba(255, 255, 255, 0.06);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        #stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+
+        section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: 1s ease;
+        }
+
+        section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+        }
+
+        .logo {
+            font-size: 22px;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+
+        .btn {
+            background: var(--white);
+            color: var(--black);
+            padding: 12px 22px;
+            border-radius: 999px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: transform .2s ease, box-shadow .2s;
+        }
+
+        .btn.outline {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, .3);
+            color: var(--white);
+        }
+
+        .btn:hover {
+            box-shadow: 0 10px 25px rgba(255, 255, 255, .15);
+        }
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+        }
+
+        h1 {
+            font-size: 58px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.8px;
+            margin-bottom: 18px;
+            line-height: 1.1;
+            position: relative;
+        }
+
+        h1::before {
+            content: '';
+            position: absolute;
+            left: -10%;
+            top: -30%;
+            width: 120%;
+            height: 160%;
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.18), transparent 70%);
+            filter: blur(40px);
+            z-index: -1;
+        }
+
+        .word {
+            opacity: .15;
+            transition: .6s ease;
+        }
+
+        .word.active {
+            opacity: 1;
+        }
+
+        .subtitle {
+            opacity: .92;
+            max-width: 560px;
+            margin-bottom: 32px;
+            font-weight: 420;
+        }
+
+        .waitlist input {
+            background: #050505;
+            border: 1px solid #222;
+            padding: 14px;
+            color: white;
+            border-radius: 12px;
+            margin-right: 8px;
+        }
+
+        .demo {
+            margin: 60px 0;
+        }
+
+        .demo video {
+            width: 100%;
+            border-radius: 18px;
+            border: 1px solid #111;
+        }
+
+        .glass {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 20px;
+            padding: 24px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        .parallax {
+            will-change: transform;
+        }
+
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            opacity: .5;
+        }
+
+        @media(max-width:768px) {
+            h1 {
+                font-size: 38px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="stars"></canvas>
+    <audio id="tick" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg" preload="auto"></audio>
+
+    <div class="container">
+        <nav class="parallax">
+            <div class="logo">VEDA</div>
+            <button class="btn outline magnetic">Coming Soon</button>
+        </nav>
+
+        <section class="hero parallax">
+            <div>
+                <h1 id="headline"></h1>
+                <p class="subtitle">Apple-like simplicity with cinematic intelligence. Turn ideas into beautiful videos
+                    through VEDA’s minimal, future-ready engine.</p>
+                <div class="waitlist">
+                    <input id="email" placeholder="Enter your email" />
+                    <button class="btn magnetic" onclick="join()">Join Waitlist</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="demo glass">
+            <h3>Demo</h3>
+            <p class="subtitle">Generate cinematic videos from text prompts</p>
+            <div
+                style="width:100%;aspect-ratio:16/9;border-radius:18px;background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);display:flex;align-items:center;justify-content:center;border:1px solid #111;">
+                <span style="font-size:3rem;opacity:0.4;">🎬</span>
+            </div>
+        </section>
+
+        <section class="grid">
+            <div class="glass">
+                <h4>🧠 Prompt Brain</h4>
+                <p class="subtitle">Intent → cinematic prompts automatically. 6 style presets built in.</p>
+            </div>
+            <div class="glass">
+                <h4>⚡ Multi Model</h4>
+                <p class="subtitle">LTX-Video pipeline with T2V + I2V modes orchestrated.</p>
+            </div>
+            <div class="glass">
+                <h4>🔬 4x Upscaling</h4>
+                <p class="subtitle">Real-ESRGAN super-resolution for crisp, high-res output.</p>
+            </div>
+            <div class="glass">
+                <h4>📦 Batch Generation</h4>
+                <p class="subtitle">Queue multiple prompts via JSON. Generate overnight.</p>
+            </div>
+            <div class="glass">
+                <h4>🌐 REST API</h4>
+                <p class="subtitle">FastAPI endpoints for programmatic video creation.</p>
+            </div>
+            <div class="glass">
+                <h4>☁️ Colab GPU</h4>
+                <p class="subtitle">Connect to free T4 GPU. No local hardware needed.</p>
+            </div>
+        </section>
+
+        <footer>VEDA © 2025 – Built for Creators</footer>
+    </div>
+
+    <script>
+        // STAR BACKGROUND
+        const c = document.getElementById('stars'), x = c.getContext('2d');
+        c.width = innerWidth; c.height = innerHeight;
+        let stars = Array.from({ length: 140 }, () => ({ x: Math.random() * c.width, y: Math.random() * c.height, r: Math.random() * 1.2, s: Math.random() * 0.3 }));
+        function draw() { x.fillStyle = 'black'; x.fillRect(0, 0, c.width, c.height); x.fillStyle = 'white'; stars.forEach(st => { x.beginPath(); x.arc(st.x, st.y, st.r, 0, Math.PI * 2); x.fill(); st.y += st.s; if (st.y > c.height) st.y = 0; }); requestAnimationFrame(draw); } draw();
+
+        // APPLE TEXT SCRUB EFFECT
+        const text = 'Your Imagination → Cinematic Reality';
+        const h = document.getElementById('headline');
+        h.innerHTML = text.split(' ').map(w => `<span class=\"word\">${w}</span>`).join(' ');
+        const words = document.querySelectorAll('.word');
+        window.addEventListener('scroll', () => {
+            const p = window.scrollY / (window.innerHeight * 0.6);
+            words.forEach((w, i) => {
+                if (p > i / words.length) w.classList.add('active');
+                else w.classList.remove('active');
+            });
+        });
+
+        // SCROLL REVEAL
+        const io = new IntersectionObserver(e => { e.forEach(i => { if (i.isIntersecting) i.target.classList.add('show'); }); }, { threshold: .2 });
+        document.querySelectorAll('section').forEach(s => io.observe(s));
+
+        // VIDEO AUTOPLAY ON VIEW
+        const vid = document.getElementById('demoVid');
+        new IntersectionObserver(e => { e.forEach(i => { if (i.isIntersecting) vid.play().catch(() => { }); else vid.pause(); }); }, { threshold: .4 }).observe(vid);
+
+        // MAGNETIC BUTTON
+        const mags = document.querySelectorAll('.magnetic');
+        mags.forEach(b => {
+            b.addEventListener('mousemove', e => {
+                const r = b.getBoundingClientRect();
+                const x = e.clientX - r.left - r.width / 2;
+                const y = e.clientY - r.top - r.height / 2;
+                b.style.transform = `translate(${x * 0.25}px,${y * 0.25}px)`;
+            });
+            b.addEventListener('mouseleave', () => b.style.transform = 'translate(0,0)');
+        });
+
+        // MICRO SOUND CTA
+        function join() {
+            const e = document.getElementById('email').value;
+            document.getElementById('tick').currentTime = 0;
+            document.getElementById('tick').play().catch(() => { });
+            if (!e) return alert('Enter email');
+            alert('Welcome to VEDA waitlist');
+            document.getElementById('email').value = '';
+        }
+    </script>
+</body>
+
+</html>
